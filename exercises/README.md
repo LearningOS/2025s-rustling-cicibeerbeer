@@ -27,3 +27,4 @@
 | conversions            | n/a                 |
 ..
 
+git add .
