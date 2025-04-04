@@ -8,7 +8,6 @@
 // hint.
 
 // I AM NOT DONE
-
 #[derive(Debug)]
 struct Package {
     sender_country: String,
@@ -29,12 +28,14 @@ impl Package {
         }
     }
 
-    fn is_international(&self) -> ??? {
-        // Something goes here...
+    // 实现跨国判断
+    fn is_international(&self) -> bool {
+        self.sender_country != self.recipient_country
     }
 
-    fn get_fees(&self, cents_per_gram: i32) -> ??? {
-        // Something goes here...
+    // 实现运费计算
+    fn get_fees(&self, cents_per_gram: i32) -> i32 {
+        self.weight_in_grams * cents_per_gram
     }
 }
 
@@ -47,7 +48,6 @@ mod tests {
     fn fail_creating_weightless_package() {
         let sender_country = String::from("Spain");
         let recipient_country = String::from("Austria");
-
         Package::new(sender_country, recipient_country, -2210);
     }
 
@@ -55,9 +55,7 @@ mod tests {
     fn create_international_package() {
         let sender_country = String::from("Spain");
         let recipient_country = String::from("Russia");
-
         let package = Package::new(sender_country, recipient_country, 1200);
-
         assert!(package.is_international());
     }
 
@@ -65,9 +63,7 @@ mod tests {
     fn create_local_package() {
         let sender_country = String::from("Canada");
         let recipient_country = sender_country.clone();
-
         let package = Package::new(sender_country, recipient_country, 1200);
-
         assert!(!package.is_international());
     }
 
@@ -75,11 +71,8 @@ mod tests {
     fn calculate_transport_fees() {
         let sender_country = String::from("Spain");
         let recipient_country = String::from("Spain");
-
         let cents_per_gram = 3;
-
         let package = Package::new(sender_country, recipient_country, 1500);
-
         assert_eq!(package.get_fees(cents_per_gram), 4500);
         assert_eq!(package.get_fees(cents_per_gram * 2), 9000);
     }
