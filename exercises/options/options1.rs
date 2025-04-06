@@ -40,4 +40,4 @@
             assert_eq!(icecreams.unwrap(), 5);
         }
     }
-}
+
