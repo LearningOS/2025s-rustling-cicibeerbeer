@@ -6,9 +6,15 @@
 // Execute `rustlings hint generics1` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+use std::i8;
 
 fn main() {
-    let mut shopping_list: Vec<?> = Vec::new();
-    shopping_list.push("milk");
+  
+    let mut numbers:Vec<i16> = Vec::new();
+    let n1: u8 = 42;
+    numbers.push(n1.into());
+    let n2: i8 = -1;
+    numbers.push(n2.into());
+
+    println!("{numbers:?}");
 }
